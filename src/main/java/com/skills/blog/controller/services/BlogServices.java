@@ -1,5 +1,6 @@
 package com.skills.blog.controller.services;
 
+import com.skills.blog.controller.dtos.UserRegistration;
 import com.skills.blog.controller.entities.Users;
 import com.skills.blog.controller.repos.UsersRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,14 +21,16 @@ public class BlogServices {
     UsersRepository usersRepository;
 
     @Transactional
-    public Users createUser() {
+    public Users createUser(UserRegistration userRegistration) {
+
         Users user = new Users();
-        user.setUsername("test");
-        user.setPassword("123456");
-        user.setEmail("test@test.com");
-        user.setBio("My big bio");
+        user.setUsername(userRegistration.getUsername());
+        user.setPassword(userRegistration.getPassword());
+        user.setEmail(userRegistration.getEmail());
+        user.setBio(userRegistration.getBio());
         user.setCreatedAt(new Date());
-        user.setAvatar("link");
+        user.setAvatar(userRegistration.getAvatar());
+        user.setRole(userRegistration.getRole());
         usersRepository.persist(user);
         return user;
     }

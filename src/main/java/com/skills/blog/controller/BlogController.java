@@ -1,11 +1,10 @@
 package com.skills.blog.controller;
 
+import com.skills.blog.controller.dtos.UserRegistration;
 import com.skills.blog.controller.entities.Users;
 import com.skills.blog.controller.services.BlogServices;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
@@ -15,20 +14,15 @@ import jakarta.ws.rs.core.MediaType;
  * Time: 06:45
  */
 @Path("/v1")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class BlogController {
     @Inject
     BlogServices blogServices;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String welcome() {
-        return "Welcome to Blogify! Great things ahead";
-    }
-
-    @GET()
+    @POST()
     @Path("/users")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Users createUser() {
-        return blogServices.createUser();
+    public Users createUser(UserRegistration userRegistration) {
+        return blogServices.createUser(userRegistration);
     }
 }
