@@ -1,5 +1,6 @@
 package com.skills.blog.controller.entities;
 
+import com.skills.blog.controller.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 @Entity
 @Setter
 @Getter
+@Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public class Users {
     private String password;
     private String bio;
     private String avatar;
-    private String role;
+    private Roles role;
     @Column(name = "created_at")
     private Date createdAt;
 }

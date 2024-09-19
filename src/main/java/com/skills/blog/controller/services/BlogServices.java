@@ -1,5 +1,6 @@
 package com.skills.blog.controller.services;
 
+import com.skills.blog.controller.Roles;
 import com.skills.blog.controller.dtos.UserRegistration;
 import com.skills.blog.controller.entities.Users;
 import com.skills.blog.controller.repos.UsersRepository;
@@ -30,7 +31,7 @@ public class BlogServices {
         user.setBio(userRegistration.getBio());
         user.setCreatedAt(new Date());
         user.setAvatar(userRegistration.getAvatar());
-        user.setRole(userRegistration.getRole());
+        user.setRole(Roles.valueOf(userRegistration.getRole()));
         usersRepository.persist(user);
         return user;
     }
